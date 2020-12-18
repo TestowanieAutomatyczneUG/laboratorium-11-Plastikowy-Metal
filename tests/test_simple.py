@@ -3,14 +3,30 @@
 # setup.py that excludes installing the "tests" package
 
 import unittest
+from unittest.mock import MagicMock
+from src.sample.Note import Note
 
-from sample.simple import add_one
 
+class TestNote(unittest.TestCase):
+    def test_note_value_error1(self):
+        test_object = MagicMock(return_value=Note)
+        test_object.side_effect = Exception
+        self.assertRaises(Exception, test_object, '123', 4.0)
 
-class TestSimple(unittest.TestCase):
+    def test_note_value_error2(self):
+        test_object = MagicMock(return_value=Note)
+        test_object.side_effect = Exception
+        self.assertRaises(Exception, test_object, '123', 4)
 
-    def test_add_one(self):
-        self.assertEqual(add_one(5), 6)
+    def test_note_value_error3(self):
+        test_object = MagicMock(return_value=Note)
+        test_object.side_effect = Exception
+        self.assertRaises(Exception, test_object, None, 4)
+
+    def test_note_value_error4(self):
+        test_object = MagicMock(return_value=Note)
+        test_object.side_effect = Exception
+        self.assertRaises(Exception, test_object, '123', None)
 
 
 if __name__ == '__main__':
